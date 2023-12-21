@@ -5,7 +5,7 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.metrics import AUC, Precision, Recall, Accuracy
-
+from tensorflow.keras.optimizers import Adam
 num_classes=26
 
 lr_schedule = tensorflow.keras.optimizers.schedules.ExponentialDecay(
@@ -13,7 +13,7 @@ lr_schedule = tensorflow.keras.optimizers.schedules.ExponentialDecay(
     decay_steps=10000,
     decay_rate=0.9)
 
-def get_model(target_size_custom, loss='categorical_crossentropy', optimizer=tensorflow.keras.optimizers.Adam(learning_rate=lr_schedule), metrics=['accuracy']):
+def build_model(target_size_custom, loss='categorical_crossentropy', optimizer=Adam(learning_rate=lr_schedule), metrics=['accuracy']):
         
     model = Sequential()
 
