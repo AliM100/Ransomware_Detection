@@ -47,8 +47,6 @@ def convert_data(pe_data_path,bytes_data_path,img_data_path,csv_data_path):
 
     files= os.listdir(bytes_data_path)
 
-    files= os.listdir(bytes_data_path)
-
     for counter, name in enumerate(files):
         name_output = name.split(".")[0]
 
