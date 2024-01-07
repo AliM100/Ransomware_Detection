@@ -8,8 +8,7 @@ num_classes=26
 def build_model(backbone, lr=1e-4):
     model = Sequential()
     model.add(backbone)
-    # model.add(layers.GlobalAveragePooling2D())
-    model.add(layers.MaxPooling2D())
+    model.add(layers.GlobalAveragePooling2D())
     model.add(layers.Dropout(0.5))
     model.add(layers.BatchNormalization())
     model.add(layers.Dense(num_classes, activation='softmax'))
