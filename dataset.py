@@ -44,7 +44,7 @@ class prepare_data:
       df_test = pd.DataFrame(columns = ['img_code','target'])
       df_val = pd.DataFrame(columns = ['img_code','target'])
 
-      df_train, df_test, df_val = self.split_train_test_val(self.img_path,df_train, df_test, df_val,classe, 0.2,0.2)
+      df_train, df_test, df_val = self.split_train_test_val(df_train, df_test, df_val,classe, 0.2,0.2)
       df_train_complete = pd.concat([df_train_complete, df_train], ignore_index = True)
       df_test_complete = pd.concat([df_test_complete, df_test], ignore_index = True)
       df_val_complete =pd.concat([df_val_complete, df_val], ignore_index = True)
