@@ -3,9 +3,9 @@ from keras import layers
 from keras.optimizers import Adam
 import tensorflow
 
-num_classes=26
 
-def build_model(backbone, lr=1e-4):
+
+def build_model(backbone, lr=1e-4, num_classes=26 ):
     model = Sequential()
     model.add(backbone)
     model.add(layers.GlobalAveragePooling2D())

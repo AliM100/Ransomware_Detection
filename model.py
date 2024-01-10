@@ -6,14 +6,14 @@ from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.metrics import AUC, Precision, Recall, Accuracy
 from tensorflow.keras.optimizers import Adam
-num_classes=26
+
 
 lr_schedule = tensorflow.keras.optimizers.schedules.ExponentialDecay(
     initial_learning_rate=0.001,
     decay_steps=10000,
     decay_rate=0.9)
 
-def build_model(target_size_custom, loss='categorical_crossentropy', optimizer=Adam(learning_rate=lr_schedule), metrics=['accuracy']):
+def build_model(target_size_custom, loss='categorical_crossentropy', optimizer=Adam(learning_rate=lr_schedule), metrics=['accuracy'],num_classes=26):
         
     model = Sequential()
 
