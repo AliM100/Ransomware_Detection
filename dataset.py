@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import math
 from keras.preprocessing.image import ImageDataGenerator
-
+import shutil
 
 
 class prepare_data:
@@ -11,6 +11,10 @@ class prepare_data:
     self.img_path=img_path
     self.class_index=class_index
 
+  def combine_datasets(self,malevis_data_path):
+    for folders in os.listdir(malevis_data_path+'/train'):
+      shutil.move(malevis_data_path+'/train/'+folders,self.img_path)
+    
   def split_train_test_val(self,df_train, df_test, df_val, classe,split_ratio_test,split_ratio_val):
 
     images = os.listdir(os.path.join(self.img_path,classe))
