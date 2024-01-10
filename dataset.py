@@ -13,7 +13,13 @@ class prepare_data:
 
   def combine_datasets(self,malevis_data_path):
     for folders in os.listdir(malevis_data_path+'/train'):
-      shutil.move(malevis_data_path+'/train/'+folders,self.img_path)
+      if folders in self.class_index:
+        shutil.move(malevis_data_path+'/train/'+folders,self.img_path)
+        #Incase you need also calidation images
+        # for file in os.listdir(malevis_data_path+"/val/"+folders):
+        #   shutil.move(malevis_data_path+"/val/"+folders+'/'+file,self.img_path+'/'+folders)
+
+    
     
   def split_train_test_val(self,df_train, df_test, df_val, classe,split_ratio_test,split_ratio_val):
 
