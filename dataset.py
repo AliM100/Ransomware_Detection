@@ -65,6 +65,11 @@ class prepare_data:
     df_test_complete.to_csv(os.path.join(self.data_path+"/csvs/test.csv"))
     df_val_complete.to_csv(os.path.join(self.data_path+"/csvs/val.csv"))
 
+
+
+def sample_rows_per_class(group,desired_samples_per_class):
+      return group.sample(min(desired_samples_per_class, len(group)), replace=False)
+
 class load_data:
 
   def __init__(self,img_path,data_csvs,target_size_custom,batch_size) :
@@ -72,19 +77,32 @@ class load_data:
     self.data_csvs=data_csvs
     self.target_size_custom=target_size_custom
     self.batch_size=batch_size
-
-
+    
+  
   def train_data(self):
+    target_column = 'target'
     train_df_partial=pd.read_csv(os.path.join(self.data_csvs,"train.csv"))
     val_df=pd.read_csv(os.path.join(self.data_csvs,"val.csv"))
 
+    desired_samples_per_class= train_df_partial[target_column].value_counts().mean() + (10 * float(train_df_partial[target_column].value_counts().mean())) / 100.0
+    train_balanced_df = train_df_partial.groupby(target_column, group_keys=False, sort=False).apply(lambda x: sample_rows_per_class(x, int(desired_samples_per_class)))
+    train_balanced_df = train_balanced_df.sample(frac=1).reset_index(drop=True)
+
+
+    desired_samples_per_class= val_df[target_column].value_counts().mean() + (10 * float(val_df[target_column].value_counts().mean())) / 100.0
+    val_balanced_df = val_df.groupby(target_column, group_keys=False, sort=False).apply(lambda x: sample_rows_per_class(x, int(desired_samples_per_class)))
+    
+    val_balanced_df = val_balanced_df.sample(frac=1).reset_index(drop=True)
+    
+    print("initial",train_df_partial)
+    print("balanced",train_balanced_df)
     datagen = ImageDataGenerator(
           rescale=1 / 255.0)
     
-    train_df =pd.concat([train_df_partial, val_df], ignore_index = True)
-    print("train_df",train_df)
-    train_gen = datagen.flow_from_dataframe(
-      dataframe=train_df,
+    train_balanced_df =pd.concat([train_balanced_df, val_balanced_df], ignore_index = True)
+    
+    train = datagen.flow_from_dataframe(
+      dataframe=train_balanced_df,
       directory=self.img_path,
       x_col="img_code",
       y_col="target",
@@ -96,8 +114,8 @@ class load_data:
       seed=42
     )
 
-    val_gen = datagen.flow_from_dataframe(
-      dataframe=val_df,
+    val = datagen.flow_from_dataframe(
+      dataframe=val_balanced_df,
       directory=self.img_path,
       x_col="img_code",
       y_col="target",
@@ -108,7 +126,7 @@ class load_data:
       shuffle=True,
       seed=42
     )
-    return train_gen,val_gen
+    return train,val
 
 
 
