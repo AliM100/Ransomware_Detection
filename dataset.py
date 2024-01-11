@@ -93,13 +93,12 @@ class load_data:
     val_balanced_df = val_df.groupby(target_column, group_keys=False, sort=False).apply(lambda x: sample_rows_per_class(x, int(desired_samples_per_class)))
     
     val_balanced_df = val_balanced_df.sample(frac=1).reset_index(drop=True)
-    
-    print("initial",train_df_partial)
-    print("balanced",train_balanced_df)
+
     datagen = ImageDataGenerator(
           rescale=1 / 255.0)
     
-    train_balanced_df =pd.concat([train_balanced_df, val_balanced_df], ignore_index = True)
+    
+    # train_balanced_df =pd.concat([train_balanced_df, val_balanced_df], ignore_index = True)
     
     train = datagen.flow_from_dataframe(
       dataframe=train_balanced_df,
