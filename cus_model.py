@@ -13,7 +13,7 @@ def get_model(shape, loss='sparse_categorical_crossentropy', optimizer=tf.keras.
         
     model = models.Sequential()
 
-    model.add(Conv2D(16, kernel_size=3, activation='relu', input_shape=(shape,1), kernel_regularizer=tf.keras.regularizers.l2(0.001)))
+    model.add(Conv2D(16, kernel_size=3, activation='relu', input_shape=shape, kernel_regularizer=tf.keras.regularizers.l2(0.001)))
     
     model.add(Conv2D(64, kernel_size=3, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
     model.add(Dropout(0.5))
