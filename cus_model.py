@@ -25,23 +25,11 @@ def get_model(shape, loss='sparse_categorical_crossentropy', optimizer=tf.keras.
     model.add(Conv2D(128, kernel_size=3, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
     model.add(Dropout(0.5))
 
-    model.add(Conv2D(512, kernel_size=3, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
-    model.add(Dropout(0.5))
 
-    model.add(Conv2D(512, kernel_size=3, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
-    model.add(Dropout(0.5))
-
-    model.add(Conv2D(1024, kernel_size=3, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
-    model.add(Dropout(0.5))
-
-    model.add(Conv2D(2048, kernel_size=3, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
-    model.add(Dropout(0.5))
 
     model.add(Flatten())
 
-    model.add(Dense(2048, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
 
-    model.add(Dense(512, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
     model.add(Dense(128, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
     model.add(Dense(64, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.001)))
 
