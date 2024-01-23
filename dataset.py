@@ -108,7 +108,7 @@ class load_data:
       target_size=self.target_size_custom,
       color_mode = "grayscale",
       batch_size=self.batch_size,
-      class_mode="categorical",
+      class_mode="sparse",
       shuffle=True,
       seed=42
     )
@@ -121,7 +121,7 @@ class load_data:
       target_size=self.target_size_custom,
       color_mode = "grayscale",
       batch_size=self.batch_size,
-      class_mode="categorical",
+      class_mode="sparse",
       shuffle=True,
       seed=42
     )
@@ -144,7 +144,7 @@ class load_data:
       target_size=self.target_size_custom,
       color_mode = "grayscale",
       batch_size=self.batch_size,
-      class_mode="categorical",
+      class_mode="sparse",
       shuffle=False,
       seed=42
   )
