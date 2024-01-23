@@ -24,7 +24,7 @@ class prepare_data:
   def split_train_test_val(self,df_train, df_test, df_val, classe,split_ratio_test,split_ratio_val):
 
     images = os.listdir(os.path.join(self.img_path,classe))
-    images = ["./"+classe+"/"+elem for elem in images]
+    images = [classe+"/"+elem for elem in images]
     index = self.class_index[classe]
 
     dim = len(images)
