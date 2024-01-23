@@ -63,7 +63,7 @@ class PreActBottleneck(nn.Module):
 
 
 class PreActResNet(nn.Module):
-    def __init__(self, block, num_blocks, num_classes=26):
+    def __init__(self, block, num_blocks, num_classes=48):
         super(PreActResNet, self).__init__()
         self.in_planes = 64
 
