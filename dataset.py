@@ -84,15 +84,17 @@ class load_data:
     train_df_partial=pd.read_csv(os.path.join(self.data_csvs,"train.csv"))
     val_df=pd.read_csv(os.path.join(self.data_csvs,"val.csv"))
 
-    desired_samples_per_class= train_df_partial[target_column].value_counts().mean() + (10 * float(train_df_partial[target_column].value_counts().mean())) / 100.0
-    train_balanced_df = train_df_partial.groupby(target_column, group_keys=False, sort=False).apply(lambda x: sample_rows_per_class(x, int(desired_samples_per_class)))
-    train_balanced_df = train_balanced_df.sample(frac=1).reset_index(drop=True)
+    train_balanced_df = train_df_partial
+    val_balanced_df = val_df
+    # desired_samples_per_class= train_df_partial[target_column].value_counts().mean() + (10 * float(train_df_partial[target_column].value_counts().mean())) / 100.0
+    # train_balanced_df = train_df_partial.groupby(target_column, group_keys=False, sort=False).apply(lambda x: sample_rows_per_class(x, int(desired_samples_per_class)))
+    # train_balanced_df = train_balanced_df.sample(frac=1).reset_index(drop=True)
 
 
-    desired_samples_per_class= val_df[target_column].value_counts().mean() + (10 * float(val_df[target_column].value_counts().mean())) / 100.0
-    val_balanced_df = val_df.groupby(target_column, group_keys=False, sort=False).apply(lambda x: sample_rows_per_class(x, int(desired_samples_per_class)))
+    # desired_samples_per_class= val_df[target_column].value_counts().mean() + (10 * float(val_df[target_column].value_counts().mean())) / 100.0
+    # val_balanced_df = val_df.groupby(target_column, group_keys=False, sort=False).apply(lambda x: sample_rows_per_class(x, int(desired_samples_per_class)))
     
-    val_balanced_df = val_balanced_df.sample(frac=1).reset_index(drop=True)
+    # val_balanced_df = val_balanced_df.sample(frac=1).reset_index(drop=True)
 
     datagen = ImageDataGenerator(
           rescale=1 / 255.0)
