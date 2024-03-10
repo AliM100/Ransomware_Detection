@@ -19,7 +19,26 @@ class prepare_data:
         # for file in os.listdir(malevis_data_path+"/val/"+folders):
         #   shutil.move(malevis_data_path+"/val/"+folders+'/'+file,self.img_path+'/'+folders)
 
-    
+  def prepare_malvis(self,malvis_path):
+    for folder_name in os.listdir(os.path.join(malvis_path, 'train')):
+        train_folder_path = os.path.join(malvis_path, 'train', folder_name)
+        # val_folder_path = os.path.join(malvis_path, 'val', folder_name)
+
+        # Check if both train and val folders exist for the same folder_name
+        if os.path.exists(train_folder_path): #and os.path.exists(val_folder_path):
+            # Define the destination path in the merged_data directory
+            destination_path = os.path.join(self.img_path, folder_name)
+
+            # Create the destination path
+            os.makedirs(destination_path, exist_ok=True)
+
+            # Copy the contents of train_folder to destination_path
+            for item in os.listdir(train_folder_path):
+                shutil.copy(os.path.join(train_folder_path, item), destination_path)
+
+            # Append the contents of val_folder to destination_path
+            # for item in os.listdir(val_folder_path):
+            #     shutil.copy(os.path.join(val_folder_path, item), destination_path)    
     
   def split_train_test_val(self,df_train, df_test, df_val, classe,split_ratio_test,split_ratio_val):
 
