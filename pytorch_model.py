@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 class CustomModel(nn.Module):
-    def __init__(self, num_classes=25):
+    def __init__(self, num_classes=25,target_size_custom = (224, 224)):
         super(CustomModel, self).__init__()
 
         self.conv1 = nn.Conv2d(1, 64, kernel_size=(3, 3), stride=1, padding=1)
